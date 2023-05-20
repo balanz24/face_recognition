@@ -28,7 +28,6 @@ def recognize_face(image, known_faces, face_names):
         name = 'Unknown'
 
         if True in matches:
-            matched_indices = [i for i, match in enumerate(matches) if match]
             matched_distances = face_recognition.face_distance(known_faces, face_encoding)
             best_match_index = np.argmin(matched_distances)
             if matches[best_match_index]:
@@ -39,11 +38,11 @@ def recognize_face(image, known_faces, face_names):
     return face_names_detected
 
 # Load known faces
-known_faces, face_names = load_known_faces('/home/pau/VC/face_recognition/faces')
-#print(known_faces, face_names)
+directory = os.getcwd()
+known_faces, face_names = load_known_faces(directory+'/faces')
 
 # Load test image
-test_image = cv2.imread('/home/pau/VC/face_recognition/input_images/input2.jpg')
+test_image = cv2.imread(directory +'/input_images/input2.jpg')
 
 # Recognize faces in the test image
 detected_faces = recognize_face(test_image, known_faces, face_names)
