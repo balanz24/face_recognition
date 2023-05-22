@@ -4,6 +4,7 @@ import numpy as np
 import face_recognition
 import math
 
+# Funció que calcula la probabilitat de match a partir de la distància euclidiana
 def face_confidence(face_distance, face_match_threshold=0.6):
     range = (1.0 - face_match_threshold)
     linear_val = (1.0 - face_distance) / (range * 2.0)
@@ -57,9 +58,9 @@ directory = os.getcwd()
 known_encodings, face_names = load_known_faces(directory+'/faces')
 
 # Test single image
-test_image = cv2.imread(directory+'/input_images/input1.jpg')
+test_image = cv2.imread(directory+'/input_images/input14.jpg')
 detected_faces = recognize_face(test_image, known_encodings, face_names)
-print(*detected_faces)
+print(*detected_faces, sep=', ')
 
 # Test all available input images
 '''for input_image in os.listdir(directory+'/input_images'):
